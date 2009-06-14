@@ -17,7 +17,7 @@ Usage
 require 'rubygems'
 require 'active_wrapper'
 
-$db, $log = ActiveWrapper.new(
+$db, $log = ActiveWrapper.setup(
   :base => File.dirname('__FILE__'),
   :env => 'development',
   :log => 'custom',

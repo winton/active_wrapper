@@ -6,8 +6,9 @@ module ActiveWrapper
     def initialize(options={}, &block)
       
       task :environment do
-        $db, $log = ActiveWrapper.new(options)
-        yield
+        $db, $log = ActiveWrapper.setup(options)
+        $db.establish_connection
+        yield if block
       end
       
       namespace :db do
