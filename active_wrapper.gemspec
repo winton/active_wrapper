@@ -7,11 +7,9 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Winton Welsh"]
   s.date = %q{2009-06-14}
-  s.default_executable = %q{active_wrapper}
   s.email = %q{mail@wintoni.us}
-  s.executables = ["active_wrapper"]
   s.extra_rdoc_files = ["README.markdown"]
-  s.files = ["gemspec.rb", "lib", "lib/active_wrapper", "lib/active_wrapper/db.rb", "lib/active_wrapper/log.rb", "lib/active_wrapper/tasks.rb", "lib/active_wrapper.rb", "MIT-LICENSE", "Rakefile", "README.markdown", "resources", "resources/migration.template", "spec", "spec/spec.opts", "spec/spec_helper.rb", "bin/active_wrapper"]
+  s.files = ["active_wrapper.gemspec", "gemspec.rb", "lib", "lib/active_wrapper", "lib/active_wrapper/db.rb", "lib/active_wrapper/log.rb", "lib/active_wrapper/tasks.rb", "lib/active_wrapper.rb", "MIT-LICENSE", "Rakefile", "README.markdown", "resources", "resources/migration.template", "spec", "spec/spec.opts", "spec/spec_helper.rb"]
   s.homepage = %q{http://github.com/winton/active_wrapper}
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.1}

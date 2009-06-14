@@ -7,7 +7,6 @@ GEM_SPEC = Gem::Specification.new do |s|
   s.homepage = "http://github.com/winton/#{GEM_NAME}"
   s.summary = "Wraps ActiveRecord and Logger for use in non-Rails environments"
   # == CONFIGURE ==
-  s.executables << GEM_NAME
   s.extra_rdoc_files = [ "README.markdown" ]
   s.files = GEM_FILES.to_a
   s.has_rdoc = false
