@@ -32,17 +32,17 @@ $log.info('log this')
 $log.clear
 </pre>
 
-<code>ActiveWrapper</code> looks for the following files within <code>:base</code>:
+<code>ActiveWrapper</code> looks for the following files within the <code>:base</code> directory:
 
-* <i>config/database.yml</i>
-* <i>db/migrate/*.rb</i>
+* <b>config/database.yml</b>
+* <b>db/migrate/*.rb</b>
 
-The <code>:env</code> option is "development" by default.
+The <code>:env</code> option is <code>"development"</code> by default.
 
 Logger
 ------
 
-In the previous example, the log is stored in <i>log/custom.log</i>.
+In the previous example, the log is stored in <b>log/custom.log</b>.
 
 If no <code>:log</code> name is specified, the <code>:env</code> option is used for the log name.
 
@@ -53,7 +53,7 @@ Setting <code>:stdout</code> to true causes stdout and stderr to redirect to the
 Rakefile
 --------
 
-Add this to your project's <i>Rakefile</i> for database migration and log tasks:
+Add this to your project's <b>Rakefile</b> for database migration and log tasks:
 
 <pre>
 require 'rubygems'
