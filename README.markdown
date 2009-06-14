@@ -15,7 +15,7 @@ Usage
 
 <pre>
 require 'rubygems'
-require 'active\_wrapper'
+require 'active_wrapper'
 
 $db, $log = ActiveWrapper.new(
   :base => File.dirname('__FILE__'),
@@ -24,10 +24,10 @@ $db, $log = ActiveWrapper.new(
   :stdout => true
 )
 
-$db.establish\_connection
-$db.generate\_migration('my_migration')
+$db.establish_connection
+$db.generate_migration('my_migration')
 $db.migrate('001')
-$db.migrate\_reset
+$db.migrate_reset
 $log.info('log this')
 $log.clear
 </pre>
@@ -58,7 +58,7 @@ Add this to your project's <i>Rakefile</i> for database migration and log tasks:
 <pre>
 require 'rubygems'
 require 'rake'
-require 'active\_wrapper/tasks'
+require 'active_wrapper/tasks'
 
 ActiveWrapper::Tasks.new(:log => 'custom.log') do
   # Put stuff you would normally put in the environment task here
