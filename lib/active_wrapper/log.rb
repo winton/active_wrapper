@@ -11,7 +11,7 @@ module ActiveWrapper
       return if @log == false
       
       FileUtils.mkdir_p("#{base}/log")
-      file = File.open("#{base}/log/#{log}", 'a')
+      file = File.open("#{base}/log/#{log}.log", 'a')
       file.sync = true
       
       if stdout

@@ -7,11 +7,8 @@ class ActiveWrapper
     
     options = {
       :base => File.dirname($0),
-      :env => 'development'
-    }.merge(options)
-    
-    options = {
-      :log => "#{options[:env]}.log"
+      :env => 'development',
+      :log => 'development'
     }.merge(options)
     
     [ Db.new(options), Log.new(options) ]

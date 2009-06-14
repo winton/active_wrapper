@@ -20,7 +20,7 @@ require 'active_wrapper'
 $db, $log = ActiveWrapper.new(
   :base => File.dirname('__FILE__'),
   :env => 'development',
-  :log => 'custom.log',
+  :log => 'custom',
   :stdout => true
 )
 
@@ -60,7 +60,7 @@ require 'rubygems'
 require 'rake'
 require 'active_wrapper/tasks'
 
-ActiveWrapper::Tasks.new(:log => 'custom.log') do
+ActiveWrapper::Tasks.new(:log => 'custom') do
   # Put stuff you would normally put in the environment task here
 end
 </pre>
