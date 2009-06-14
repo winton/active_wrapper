@@ -1,0 +1,11 @@
+class __migration_name__ < ActiveRecord::Migration
+  def self.up
+    create_table :__migration_table__ do |t|
+      
+    end
+  end
+
+  def self.down
+    drop_table :__migration_table__
+  end
+end
