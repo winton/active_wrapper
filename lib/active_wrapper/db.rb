@@ -21,8 +21,8 @@ module ActiveWrapper
     end
 
     def migrate_reset
-      db_migrate(0)
-      db_migrate
+      migrate(0)
+      migrate
     end
 
     def generate_migration(name=nil)
