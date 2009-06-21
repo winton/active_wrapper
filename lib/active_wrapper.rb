@@ -21,3 +21,5 @@ module ActiveWrapper
     end
   end
 end
+
+ActiveRecord::Base.default_timezone = :utc
