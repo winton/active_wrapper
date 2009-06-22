@@ -17,7 +17,7 @@ Usage
 require 'rubygems'
 require 'active_wrapper'
 
-$db, $log = ActiveWrapper.setup(
+$db, $log, $mail = ActiveWrapper.setup(
   :base => File.dirname('__FILE__'),
   :env => 'development',
   :log => 'custom',
@@ -30,11 +30,13 @@ $db.migrate('001')
 $db.migrate_reset
 $log.info('log this')
 $log.clear
+$mail.deliver(:from => 'me@me.com', :to => 'you@you.com', :subject => 'subject', :body => 'body')
 </pre>
 
 <code>ActiveWrapper</code> looks for the following files within the <code>:base</code> directory:
 
 * <b>config/database.yml</b>
+* <b>config/mail.yml</b>
 * <b>db/migrate/*.rb</b>
 
 The <code>:env</code> option is <code>"development"</code> by default.
@@ -49,6 +51,25 @@ If no <code>:log</code> name is specified, the <code>:env</code> option is used 
 You may also set <code>:log</code> to false to disable logging entirely.
 
 Setting <code>:stdout</code> to true causes stdout and stderr to redirect to the logger. It is false by default.
+
+Mailer
+------
+
+Your <b>mail.yml</b> should look something like this:
+
+<pre>
+development:
+  smtp:
+    address: smtp.gmail.com
+    authentication: :plain
+    domain: gmail.com
+    password: password
+    port: 587
+    enable_starttls_auto: true
+    user_name: user@gmail.com
+</pre>
+
+This file is optional.
 
 Rakefile
 --------
