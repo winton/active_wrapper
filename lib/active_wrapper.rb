@@ -22,8 +22,14 @@ module ActiveWrapper
         :env => 'development',
         :log => 'development'
       }.merge(options.reject { |k, v| v.nil? })
+      
+      db = Db.new(options)
+      log = Log.new(options)
+      mail = Mail.new(options)
+      
+      ActionMailer::Base.logger = log
     
-      [ Db.new(options), Log.new(options), Mail.new(options) ]
+      [ db, log, mail ]
     end
   end
 end
