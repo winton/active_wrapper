@@ -20,7 +20,7 @@ module ActiveWrapper
       options = {
         :base => File.dirname($0),
         :env => 'development',
-        :log => 'development'
+        :log => options[:env] || 'development'
       }.merge(options.reject { |k, v| v.nil? })
       
       db = Db.new(options)
