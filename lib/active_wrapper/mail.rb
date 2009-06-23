@@ -11,11 +11,13 @@ module ActiveWrapper
       
       if File.exists?(path)
         @config = YAML::load(File.open(path))
-        if @config && @config[@env] && @config = @config[@env]['smtp']
+        if @config && @config = @config[@env]
           
           @config = @config.to_options
-          ActionMailer::Base.delivery_method = :smtp
-          ActionMailer::Base.smtp_settings = @config
+          if @config[:smtp]
+            ActionMailer::Base.delivery_method = :smtp
+            ActionMailer::Base.smtp_settings = @config[:smtp]
+          end
         end
       end
     end
