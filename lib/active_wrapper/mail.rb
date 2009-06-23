@@ -1,7 +1,7 @@
 module ActiveWrapper
   class Mail
     
-    attr_reader :base, :env
+    attr_reader :base, :env, :config
     
     def initialize(options)
       @base = options[:base]
@@ -10,11 +10,12 @@ module ActiveWrapper
       path = "#{base}/config/mail.yml"
       
       if File.exists?(path)
-        config = YAML::load(File.open(path))
-        if config && config[@env] && config = config[@env]['smtp']
+        @config = YAML::load(File.open(path))
+        if @config && @config[@env] && @config = @config[@env]['smtp']
           
+          @config = @config.to_options
           ActionMailer::Base.delivery_method = :smtp
-          ActionMailer::Base.smtp_settings = config.to_options
+          ActionMailer::Base.smtp_settings = @config
         end
       end
     end
