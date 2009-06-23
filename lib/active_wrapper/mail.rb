@@ -14,6 +14,8 @@ module ActiveWrapper
         if @config && @config = @config[@env]
           
           @config = @config.to_options
+          @config[:imap] = @config[:imap].to_options if @config[:imap]
+          @config[:smtp] = @config[:smtp].to_options if @config[:smtp]
           if @config[:smtp]
             ActionMailer::Base.delivery_method = :smtp
             ActionMailer::Base.smtp_settings = @config[:smtp]
