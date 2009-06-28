@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.date = %q{2009-06-27}
   s.email = %q{mail@wintoni.us}
   s.extra_rdoc_files = ["README.markdown"]
-  s.files = ["active_wrapper.gemspec", "gemspec.rb", "lib", "lib/active_wrapper", "lib/active_wrapper/db.rb", "lib/active_wrapper/log.rb", "lib/active_wrapper/mail.rb", "lib/active_wrapper/tasks.rb", "lib/active_wrapper.rb", "MIT-LICENSE", "Rakefile", "README.markdown", "resources", "resources/migration.template", "spec", "spec/spec.opts", "spec/spec_helper.rb", "tmp", "tmp/action_mailer_optional_tls.git.tgz", "tmp/pony.git.tgz"]
+  s.files = ["active_wrapper.gemspec", "gemspec.rb", "lib", "lib/active_wrapper", "lib/active_wrapper/db.rb", "lib/active_wrapper/log.rb", "lib/active_wrapper/mail.rb", "lib/active_wrapper/tasks.rb", "lib/active_wrapper.rb", "MIT-LICENSE", "Rakefile", "README.markdown", "resources", "resources/migration.template", "spec", "spec/spec.opts", "spec/spec_helper.rb"]
   s.homepage = %q{http://github.com/winton/active_wrapper}
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.1}
