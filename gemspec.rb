@@ -7,11 +7,13 @@ GEM_SPEC = Gem::Specification.new do |s|
   s.homepage = "http://github.com/winton/#{GEM_NAME}"
   s.summary = "Wraps ActiveRecord and Logger for use in non-Rails environments"
   # == CONFIGURE ==
+  s.add_dependency('activerecord', '=2.3.2')
+  s.add_dependency('actionmailer', '=2.3.2')
   s.extra_rdoc_files = [ "README.markdown" ]
   s.files = GEM_FILES.to_a
   s.has_rdoc = false
   s.name = GEM_NAME
   s.platform = Gem::Platform::RUBY
   s.require_path = "lib"
-  s.version = "0.1.1"
+  s.version = "0.1.2"
 end
