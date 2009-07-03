@@ -9,7 +9,9 @@ module ActiveWrapper
       
       path = "#{base}/config/mail.yml"
       
-      if File.exists?(path)
+      if @env == 'test'
+        ActionMailer::Base.delivery_method = :test
+      elsif File.exists?(path)
         @config = YAML::load(File.open(path))
         if @config && @config = @config[@env]
           
