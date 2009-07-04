@@ -21,13 +21,13 @@ module ActiveWrapper
     end
 
     def migrate_reset
-      if @@env == 'test'
+      if @env == 'test'
         stdout = $stdout
         $stdout = File.new('/dev/null', 'w')
       end
       migrate(0)
       migrate
-      if @@env == 'test'
+      if @env == 'test'
         $stdout = stdout
       end
     end
