@@ -5,7 +5,7 @@ module ActiveWrapper
     
     def initialize(options)
       @base = options[:base]
-      @env = options[:env]
+      @env = options[:env].to_s
     end
     
     def establish_connection
@@ -21,8 +21,15 @@ module ActiveWrapper
     end
 
     def migrate_reset
+      if @@env == 'test'
+        stdout = $stdout
+        $stdout = File.new('/dev/null', 'w')
+      end
       migrate(0)
       migrate
+      if @@env == 'test'
+        $stdout = stdout
+      end
     end
 
     def generate_migration(name=nil)
