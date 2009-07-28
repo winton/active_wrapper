@@ -11,17 +11,20 @@ module ActiveWrapper
       
       if @env == 'test'
         ActionMailer::Base.delivery_method = :test
-      elsif File.exists?(path)
-        @config = YAML::load(File.open(path))
-        if @config && @config = @config[@env]
-          
-          @config = @config.to_options
-          @config[:imap] = @config[:imap].to_options if @config[:imap]
-          @config[:smtp] = @config[:smtp].to_options if @config[:smtp]
-          if @config[:smtp]
-            ActionMailer::Base.delivery_method = :smtp
-            ActionMailer::Base.smtp_settings = @config[:smtp]
+      else
+        @config[:smtp] = options[:smtp]
+        @config[:imap] = options[:imap]
+        if File.exists?(path)
+          @config = YAML::load(File.open(path))
+          if @config && @config = @config[@env]
+            @config = @config.to_options
+            @config[:imap] = @config[:imap].to_options unless @config[:imap]
+            @config[:smtp] = @config[:smtp].to_options unless @config[:smtp]
           end
+        end
+        if @config[:smtp]
+          ActionMailer::Base.delivery_method = :smtp
+          ActionMailer::Base.smtp_settings = @config[:smtp]
         end
       end
     end

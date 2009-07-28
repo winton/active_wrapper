@@ -18,7 +18,7 @@ require 'rubygems'
 require 'active_wrapper'
 
 $db, $log, $mail = ActiveWrapper.setup(
-  :base => File.dirname('__FILE__'),
+  :base => File.dirname(__FILE__),
   :env => 'development',
   :log => 'custom',
   :stdout => true
