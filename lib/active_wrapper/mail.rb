@@ -5,6 +5,7 @@ module ActiveWrapper
     
     def initialize(options)
       @base = options[:base]
+      @config = {}
       @env = options[:env].to_s
       
       path = "#{base}/config/mail.yml"
@@ -15,11 +16,10 @@ module ActiveWrapper
         @config[:smtp] = options[:smtp]
         @config[:imap] = options[:imap]
         if File.exists?(path)
-          @config = YAML::load(File.open(path))
-          if @config && @config = @config[@env]
-            @config = @config.to_options
-            @config[:imap] = @config[:imap].to_options unless @config[:imap]
-            @config[:smtp] = @config[:smtp].to_options unless @config[:smtp]
+          yaml = YAML::load(File.open(path))
+          if yaml && yaml = yaml[@env].to_options
+            @config[:imap] = yaml[:imap].to_options unless @config[:imap]
+            @config[:smtp] = yaml[:smtp].to_options unless @config[:smtp]
           end
         end
         if @config[:smtp]
