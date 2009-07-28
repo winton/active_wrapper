@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{active_wrapper}
-  s.version = "0.1.5"
+  s.version = "0.1.6"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Winton Welsh"]
-  s.date = %q{2009-07-03}
+  s.date = %q{2009-07-28}
   s.email = %q{mail@wintoni.us}
   s.extra_rdoc_files = ["README.markdown"]
   s.files = ["active_wrapper.gemspec", "gemspec.rb", "lib", "lib/active_wrapper", "lib/active_wrapper/db.rb", "lib/active_wrapper/log.rb", "lib/active_wrapper/mail.rb", "lib/active_wrapper/tasks.rb", "lib/active_wrapper.rb", "MIT-LICENSE", "Rakefile", "README.markdown", "resources", "resources/migration.template", "spec", "spec/spec.opts", "spec/spec_helper.rb"]
