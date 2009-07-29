@@ -1,0 +1,6 @@
+test:
+ database: active_wrapper_test
+ adapter: mysql
+ username: root
+ password: 
+ host: localhost

@@ -7,18 +7,25 @@ module ActiveWrapper
       
       task :environment do
         $db, $log = ActiveWrapper.setup(options)
-        $db.establish_connection
         yield if block
       end
       
       namespace :db do
+        desc "Create the database"
+        task :create do
+          $db.create_db
+        end
+        
+        desc "Drop the database"
+        task :drop do
+          $db.drop_db
+        end
+        
         desc "Migrate the database with optional VERSION"
         task :migrate => :environment do
           $db.migrate(ENV["VERSION"] ? ENV["VERSION"].to_i : nil)
         end
-      end
-      
-      namespace :generate do
+        
         desc "Generate a migration with given NAME"
         task :migration => :environment do
           $db.generate_migration(ENV['NAME'])

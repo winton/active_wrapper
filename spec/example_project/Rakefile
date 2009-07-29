@@ -1,0 +1,8 @@
+require 'rubygems'
+require 'rake'
+require File.expand_path(File.dirname(__FILE__) + "/../../lib/active_wrapper/tasks")
+
+ActiveWrapper::Tasks.new(
+  :base => File.dirname(__FILE__),
+  :env => 'test'
+)
