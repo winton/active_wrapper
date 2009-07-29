@@ -24,6 +24,8 @@ $db, $log, $mail = ActiveWrapper.setup(
   :stdout => true
 )
 
+$db.drop_db
+$db.create_db
 $db.establish_connection
 $db.generate_migration('my_migration')
 $db.migrate('001')

@@ -1,5 +1,9 @@
 GEM_NAME = 'active_wrapper'
-GEM_FILES = FileList['**/*'] - FileList['coverage', 'coverage/**/*', 'pkg', 'pkg/**/*']
+GEM_FILES = FileList['**/*'] - FileList[
+  'coverage', 'coverage/**/*',
+  'pkg', 'pkg/**/*',
+  'spec/example_project/log', 'spec/example_project/log/*'
+]
 GEM_SPEC = Gem::Specification.new do |s|
   # == CONFIGURE ==
   s.author = "Winton Welsh"
@@ -15,5 +19,5 @@ GEM_SPEC = Gem::Specification.new do |s|
   s.name = GEM_NAME
   s.platform = Gem::Platform::RUBY
   s.require_path = "lib"
-  s.version = "0.1.6"
+  s.version = "0.1.7"
 end
