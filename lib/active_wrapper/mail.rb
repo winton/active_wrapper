@@ -5,16 +5,18 @@ module ActiveWrapper
     
     def initialize(options)
       @base = options[:base]
-      @config = {}
+      @config = {
+        :smtp => options[:smtp] || {},
+        :imap => options[:imap] || {}
+      }
       @env = options[:env].to_s
       
       path = "#{base}/config/mail.yml"
       
       if @env == 'test'
         ActionMailer::Base.delivery_method = :test
+        @config = nil
       else
-        @config[:smtp] = options[:smtp] || {}
-        @config[:imap] = options[:imap] || {}
         if File.exists?(path)
           yaml = YAML::load(File.open(path))
           if yaml && yaml = yaml[@env].to_options
