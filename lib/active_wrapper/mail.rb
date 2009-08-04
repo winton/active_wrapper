@@ -13,8 +13,8 @@ module ActiveWrapper
       if @env == 'test'
         ActionMailer::Base.delivery_method = :test
       else
-        @config[:smtp] = options[:smtp]
-        @config[:imap] = options[:imap]
+        @config[:smtp] = options[:smtp] || {}
+        @config[:imap] = options[:imap] || {}
         if File.exists?(path)
           yaml = YAML::load(File.open(path))
           if yaml && yaml = yaml[@env].to_options
