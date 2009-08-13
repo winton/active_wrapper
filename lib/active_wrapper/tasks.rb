@@ -12,12 +12,12 @@ module ActiveWrapper
       
       namespace :db do
         desc "Create the database"
-        task :create do
+        task :create => :environment do
           $db.create_db
         end
         
         desc "Drop the database"
-        task :drop do
+        task :drop => :environment do
           $db.drop_db
         end
         
