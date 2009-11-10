@@ -4,3 +4,4 @@ test:
  username: root
  password: 
  host: localhost
+ socket: /tmp/mysql.sock

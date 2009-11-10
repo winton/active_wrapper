@@ -7,8 +7,13 @@ module ActiveWrapper
       @base = options[:base]
       if File.exists?(path = "#{base}/config/database.yml")
         @config = YAML::load(File.open(path))
+      else
+        raise "Could not find #{path}"
       end
       @env = options[:env].to_s
+      unless config[env]
+        raise "Environment \"#{env}\" not found in #{path}"
+      end
     end
     
     def connected?
@@ -36,6 +41,7 @@ module ActiveWrapper
     end
 
     def migrate(version=nil)
+      establish_connection
       redirect_stdout do
         ActiveRecord::Migrator.migrate("#{base}/db/migrate", version)
       end
