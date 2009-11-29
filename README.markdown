@@ -12,7 +12,7 @@ Setup
 -----
 
 <pre>
-sudo gem install active_wrapper
+sudo gem install active_wrapper --source http://gemcutter.org
 </pre>
 
 Usage
