@@ -1,7 +1,6 @@
 test:
- database: active_wrapper_test
+ database: active_wrapper
  adapter: mysql
  username: root
  password: 
  host: localhost
- socket: /tmp/mysql.sock

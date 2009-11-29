@@ -3,10 +3,10 @@ Dir["#{File.dirname(__FILE__)}/../vendor/*/lib"].each do |path|
 end
 
 require 'rubygems'
-gem 'activerecord', '=2.3.4'
-gem 'actionmailer', '=2.3.4'
-require 'activerecord'
-require 'actionmailer'
+gem 'activerecord', '=2.3.5'
+gem 'actionmailer', '=2.3.5'
+require 'active_record'
+require 'action_mailer'
 require 'logger'
 require 'yaml'
 

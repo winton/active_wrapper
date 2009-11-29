@@ -18,7 +18,7 @@ describe ActiveWrapper::Db do
   end
 
   it "should create a database" do
-    $db.current_database.should == 'active_wrapper_test'
+    $db.current_database.should == 'active_wrapper'
   end
 
   it "should drop a database" do
