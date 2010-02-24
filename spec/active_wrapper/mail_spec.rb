@@ -10,7 +10,7 @@ describe ActiveWrapper::Db do
   end
   
   it "should set instance variables" do
-    $mail.base.should == '/Users/winton/Sites/repositories/active/active_wrapper/spec/example_project'
+    $mail.base.should =~ %r{active_wrapper/spec/example_project}
     $mail.config.should == {
       :smtp => {
         :address => "smtp.gmail.com",

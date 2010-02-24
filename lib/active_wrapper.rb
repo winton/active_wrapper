@@ -7,6 +7,7 @@ gem 'activerecord', '=2.3.5'
 gem 'actionmailer', '=2.3.5'
 require 'active_record'
 require 'action_mailer'
+require 'fileutils'
 require 'logger'
 require 'yaml'
 
