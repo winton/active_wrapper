@@ -22,7 +22,7 @@ module ActiveWrapper
       
       options = {
         :base => File.dirname($0),
-        :env => 'development',
+        :env => ENV['RACK_ENV'] || ENV['RAILS_ENV'] || ENV['MERB_ENV'] || 'development',
         :log => options[:env] || 'development'
       }.merge(options.reject { |k, v| v.nil? })
       

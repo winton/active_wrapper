@@ -14,7 +14,6 @@ end
 desc "Install gem"
 task :install do
   Rake::Task['gem'].invoke
-  `gem uninstall #{GEM_NAME} -x`
   `gem install pkg/#{GEM_NAME}*.gem`
   `rm -Rf pkg`
 end
