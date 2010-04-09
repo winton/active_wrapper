@@ -20,10 +20,11 @@ module ActiveWrapper
     
     def setup(options={})
       
+      env = ENV['RACK_ENV'] || ENV['RAILS_ENV'] || ENV['MERB_ENV'] || 'development'
       options = {
         :base => File.dirname($0),
-        :env => ENV['RACK_ENV'] || ENV['RAILS_ENV'] || ENV['MERB_ENV'] || 'development',
-        :log => options[:env] || 'development'
+        :env => options[:env] || env,
+        :log => options[:env] || env
       }.merge(options.reject { |k, v| v.nil? })
       
       db = Db.new(options)
