@@ -12,6 +12,7 @@ describe ActiveWrapper::Db do
   it "should set instance variables" do
     $mail.base.should =~ %r{active_wrapper/spec/example_project}
     $mail.config.should == {
+      :sendmail => false,
       :smtp => {
         :address => "smtp.gmail.com",
         :authentication => :plain,

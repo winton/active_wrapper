@@ -7,6 +7,7 @@ module ActiveWrapper
       @base = options[:base]
       @config = {
         :smtp => options[:smtp] || {},
+        :sendmail => options[:sendmail] || nil,
         :imap => options[:imap] || {}
       }
       @env = options[:env].to_s
@@ -18,11 +19,14 @@ module ActiveWrapper
         if yaml && yaml[@env]
           yaml = yaml[@env].to_options
           @config[:imap] = yaml[:imap].to_options if yaml[:imap]
+          @config[:sendmail] = yaml[:sendmail] if !yaml[:sendmail].nil?
           @config[:smtp] = yaml[:smtp].to_options if yaml[:smtp]
         end
       end
       if @env == 'test'
         ActionMailer::Base.delivery_method = :test
+      elsif @config[:sendmail]
+        ActionMailer::Base.delivery_method = :sendmail
       elsif @config[:smtp]
         ActionMailer::Base.delivery_method = :smtp
         ActionMailer::Base.smtp_settings = @config[:smtp]
