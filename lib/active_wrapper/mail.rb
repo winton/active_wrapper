@@ -37,7 +37,7 @@ module ActiveWrapper
       Mailer.deliver_email(options)
     end
     
-    class Mailer < ActionMailer::Base
+    class Mailer < ::ActionMailer::Base
       def email(options)
         from        options[:from]
         recipients  options[:to]

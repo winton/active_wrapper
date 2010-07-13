@@ -3,13 +3,16 @@ source "http://rubygems.org"
 v = {
   :actionmailer => '=2.3.5',
   :activerecord => '=2.3.5',
-  :bundler => '=1.0.0.beta.2',
+  :bundler => '=1.0.0.beta.5',
   :rake => '=0.8.7',
   :rspec => '=1.3.0'
 }
 
 group :gemspec do
+  gem 'activerecord', v[:activerecord]
+  gem 'actionmailer', v[:actionmailer]
   gem 'bundler', v[:bundler]
+  gem 'mysql'
 end
 
 group :gemspec_dev do
@@ -17,8 +20,8 @@ group :gemspec_dev do
 end
 
 group :lib do
-  gem 'activerecord', v[:activerecord], :require => %w(active_record)
-  gem 'actionmailer', v[:actionmailer], :require => %w(action_mailer)
+  gem 'activerecord', v[:activerecord]
+  gem 'actionmailer', v[:actionmailer]
   gem 'mysql'
 end
 

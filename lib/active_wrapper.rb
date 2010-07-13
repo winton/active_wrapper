@@ -1,10 +1,13 @@
 require 'rubygems'
 require 'bundler'
+
+Bundler.require(:lib)
+
+require 'action_mailer'
+require 'active_record'
 require 'fileutils'
 require 'logger'
 require 'yaml'
-
-Bundler.require(:lib)
 
 $:.unshift File.dirname(__FILE__) + '/active_wrapper'
 
