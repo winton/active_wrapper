@@ -1,12 +1,15 @@
-$TESTING=true
-SPEC = File.dirname(__FILE__)
-$:.unshift File.expand_path("#{SPEC}/../lib")
+require 'rubygems'
+require 'bundler'
 
-require 'active_wrapper'
-require 'pp'
+Bundler.require(:spec)
 
 Spec::Runner.configure do |config|
 end
+
+SPEC = File.dirname(__FILE__)
+
+require "#{Bundler.root}/lib/active_wrapper"
+require 'pp'
 
 # For use with rspec textmate bundle
 def debug(object)

@@ -1,54 +1,41 @@
 require 'rubygems'
-require 'rake'
-require 'rake/gempackagetask'
-require 'spec/rake/spectask'
-require 'gemspec'
+require 'bundler'
 
-desc "Generate gemspec"
+Bundler.require(:rake)
+
+def gemspec
+  @gemspec ||= begin
+    file = File.expand_path('../active_wrapper.gemspec', __FILE__)
+    eval(File.read(file), binding, file)
+  end
+end
+
+if defined?(Rake::GemPackageTask)
+  Rake::GemPackageTask.new(gemspec) do |pkg|
+    pkg.gem_spec = gemspec
+  end
+  task :gem => :gemspec
+end
+
+if defined?(Spec::Rake::SpecTask)
+  desc "Run specs"
+  Spec::Rake::SpecTask.new do |t|
+    t.spec_files = FileList['spec/**/*_spec.rb']
+    t.spec_opts = %w(-fs --color)
+    t.warning = true
+  end
+  task :spec
+end
+
+desc "Install gem locally"
+task :install => :package do
+  sh %{gem install pkg/#{gemspec.name}-#{gemspec.version}}
+end
+
+desc "Validate the gemspec"
 task :gemspec do
-  File.open("#{Dir.pwd}/#{GEM_NAME}.gemspec", 'w') do |f|
-    f.write(GEM_SPEC.to_ruby)
-  end
+  gemspec.validate
 end
 
-desc "Install gem"
-task :install do
-  Rake::Task['gem'].invoke
-  `gem install pkg/#{GEM_NAME}*.gem`
-  `rm -Rf pkg`
-end
-
-desc "Package gem"
-Rake::GemPackageTask.new(GEM_SPEC) do |pkg|
-  pkg.gem_spec = GEM_SPEC
-end
-
-desc "Setup project"
-task :setup do
-  name = File.basename(Dir.pwd)
-  `rm -Rf .git`
-  begin
-    dir = Dir['**/gem_template*']
-    from = dir.pop
-    if from
-      rb = from.include?('.rb')
-      to = File.dirname(from) + "/#{name}#{'.rb' if rb}"
-      FileUtils.mv(from, to)
-    end
-  end while dir.length > 0
-  Dir["**/*"].each do |path|
-    next if path.include?('Rakefile')
-    if File.file?(path)
-      `sed -i "" 's/gem_template/#{name}/g' #{path}`
-    end
-  end
-  `git init`
-end
-
-desc "Run specs"
-Spec::Rake::SpecTask.new do |t|
-  t.spec_opts = ["--format", "specdoc", "--colour"]
-  t.spec_files = FileList["spec/**/*_spec.rb"]
-end
-
+task :package => :gemspec
 task :default => :spec

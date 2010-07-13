@@ -1,7 +1,6 @@
 .DS_Store
 *.gem
-*.gemspec
+*.log
 coverage
 pkg
-spec/example_project/log/*.log
 tmp
