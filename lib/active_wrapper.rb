@@ -1,7 +1,6 @@
-require 'rubygems'
-require 'bundler'
+require File.dirname(__FILE__) + '/active_wrapper/gems'
 
-Bundler.require(:lib)
+ActiveWrapper::Gems.new(:lib)
 
 require 'action_mailer'
 require 'active_record'
@@ -11,11 +10,10 @@ require 'yaml'
 
 $:.unshift File.dirname(__FILE__) + '/active_wrapper'
 
-require 'version'
-
 require 'db'
 require 'log'
 require 'mail'
+require 'version'
 
 module ActiveWrapper
   class <<self

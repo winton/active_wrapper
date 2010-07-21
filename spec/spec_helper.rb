@@ -1,15 +1,14 @@
-require 'rubygems'
-require 'bundler'
+$root = File.expand_path('../../', __FILE__)
 
-Bundler.require(:spec)
+require "#{$root}/lib/active_wrapper/gems"
+
+ActiveWrapper::Gems.new(:spec)
+
+require 'pp'
+require "#{$root}/lib/active_wrapper"
 
 Spec::Runner.configure do |config|
 end
-
-SPEC = File.dirname(__FILE__)
-
-require "#{Bundler.root}/lib/active_wrapper"
-require 'pp'
 
 # For use with rspec textmate bundle
 def debug(object)

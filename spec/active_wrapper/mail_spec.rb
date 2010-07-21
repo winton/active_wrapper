@@ -4,7 +4,7 @@ describe ActiveWrapper::Db do
   
   before(:each) do
     $db, $log, $mail = ActiveWrapper.setup(
-      :base => SPEC + '/example_project',
+      :base => $root + '/spec/example_project',
       :env => 'test'
     )
   end

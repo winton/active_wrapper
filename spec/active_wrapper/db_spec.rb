@@ -4,7 +4,7 @@ describe ActiveWrapper::Db do
   
   before(:each) do
     $db, $log, $mail = ActiveWrapper.setup(
-      :base => SPEC + '/example_project',
+      :base => $root + '/spec/example_project',
       :env => 'test'
     )
     $db.drop_db
@@ -41,7 +41,7 @@ describe ActiveWrapper::Db do
   
   it "should generate a migration" do
     $db.generate_migration 'another_test'
-    path = SPEC + "/example_project/db/migrate/002_another_test.rb"
+    path = $root + "/spec/example_project/db/migrate/002_another_test.rb"
     File.exists?(path).should == true
     FileUtils.rm_f path
   end
