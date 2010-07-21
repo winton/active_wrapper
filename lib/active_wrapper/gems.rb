@@ -8,7 +8,6 @@ unless defined?(ActiveWrapper::Gems)
       VERSIONS = {
         :actionmailer => '=2.3.5',
         :activerecord => '=2.3.5',
-        :bundler => '=1.0.0.beta.5',
         :rake => '=0.8.7',
         :rspec => '=1.3.0'
       }
