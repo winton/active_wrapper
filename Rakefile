@@ -35,7 +35,7 @@ task :install => :package do
 end
 
 namespace :gems do
-  desc "Install gems from gems file, use DOCS=1|0, SUDO=1|0"
+  desc "Install gems (DEV=1|0 DOCS=1|0 SUDO=1|0)"
   task :install do
     file = File.dirname(__FILE__) + '/gems'
     sudo = (ENV['SUDO'] ||= '0').to_i
@@ -51,15 +51,17 @@ namespace :gems do
         end
       end
     else
-      ActiveWrapper::Gems::TYPES[:gemspec].each do |g|
-        gems << [ g.to_s, ActiveWrapper::Gems::VERSIONS[g] ]
+      gems = GemTemplate::Gems::TYPES[:gemspec]
+      gems = GemTemplate::Gems::TYPES[:gemspec_dev] if ENV['DEV'] == '1'
+      gems.collect! do |g|
+        [ g.to_s, GemTemplate::Gems::VERSIONS[g] ]
       end
     end
     
     gems.each do |(name, version)|      
       if Gem.source_index.find_name(name, version).empty?
         version = version ? "-v #{version}" : ''
-        puts "#{sudo} gem install #{name} #{version} #{docs}"
+        system "#{sudo} gem install #{name} #{version} #{docs}"
       else
         puts "already installed: #{name} #{version}"
       end
