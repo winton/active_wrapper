@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/active_wrapper/gems'
 
-ActiveWrapper::Gems.new(:lib)
+ActiveWrapper::Gems.require(:lib)
 
 require 'action_mailer'
 require 'active_record'
@@ -32,6 +32,8 @@ module ActiveWrapper
       mail = Mail.new(options)
       
       ActionMailer::Base.logger = log
+      
+      ActiveWrapper::Gems.lockfile
     
       [ db, log, mail ]
     end
