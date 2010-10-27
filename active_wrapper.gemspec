@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
     s.add_development_dependency g.to_s, ActiveWrapper::Gems::VERSIONS[g]
   end
 
-  s.files = Dir.glob("{bin,lib}/**/*") + %w(LICENSE README.md)
+  s.files = Dir.glob("{bin,lib,resources}/**/*") + %w(LICENSE README.md)
   s.executables = Dir.glob("{bin}/*").collect { |f| File.basename(f) }
   s.require_path = 'lib'
 end
