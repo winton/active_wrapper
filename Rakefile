@@ -29,11 +29,6 @@ if defined?(Spec::Rake::SpecTask)
   task :spec
 end
 
-desc "Install gem locally"
-task :install => :package do
-  sh %{gem install pkg/#{gemspec.name}-#{gemspec.version}}
-end
-
 namespace :gems do
   desc "Install gems (DEV=1|0 DOCS=1|0 SUDO=1|0)"
   task :install do
@@ -67,6 +62,11 @@ namespace :gems do
       end
     end
   end
+end
+
+desc "Install gem locally"
+task :install => :package do
+  sh %{gem install pkg/#{gemspec.name}-#{gemspec.version}}
 end
 
 desc "Validate the gemspec"
