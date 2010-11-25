@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-describe ActiveWrapper::Db do
+describe ActiveWrapper::Email do
   
   before(:each) do
     $db, $log, $mail = ActiveWrapper.setup(
@@ -12,7 +12,7 @@ describe ActiveWrapper::Db do
   it "should set instance variables" do
     $mail.base.should =~ %r{active_wrapper/spec/example_project}
     $mail.config.should == {
-      :sendmail => false,
+      :sendmail => nil,
       :smtp => {
         :address => "smtp.gmail.com",
         :authentication => :plain,
@@ -21,16 +21,15 @@ describe ActiveWrapper::Db do
         :port => 587,
         :enable_starttls_auto => true,
         :user_name => "test@mydomain.com"
-      },
-      :imap => {
-        :password => "password",
-        :port => 993,
-        :server => "imap.gmail.com",
-        :ssl => true,
-        :use_login => true,
-        :username => "test@mydomain.com"
       }
     }
     $mail.env.should == 'test'
+  end
+  
+  it "should set Pony defaults" do
+    Pony.options.should == {
+      :via => :smtp,
+      :via_options => $mail.config[:smtp]
+    }
   end
 end

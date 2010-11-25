@@ -2,17 +2,17 @@ require File.dirname(__FILE__) + '/active_wrapper/gems'
 
 ActiveWrapper::Gems.require(:lib)
 
-require 'action_mailer'
 require 'active_record'
 require 'fileutils'
 require 'logger'
+require 'pony'
 require 'yaml'
 
 $:.unshift File.dirname(__FILE__) + '/active_wrapper'
 
 require 'db'
+require 'email'
 require 'log'
-require 'mail'
 require 'version'
 
 module ActiveWrapper
@@ -28,13 +28,9 @@ module ActiveWrapper
       }.merge(options.reject { |k, v| v.nil? })
       
       db = Db.new(options)
+      mail = Email.new(options)
       log = Log.new(options)
-      mail = Mail.new(options)
       
-      ActionMailer::Base.logger = log
-      
-      ActiveWrapper::Gems.lockfile
-    
       [ db, log, mail ]
     end
   end

@@ -95,12 +95,12 @@ module ActiveWrapper
     
     def redirect_stdout(&block)
       if env == 'test'
-        stdout = $stdout
-        $stdout = File.new('/dev/null', 'w')
+        stdout = $stdout.dup
+        $stdout = $stdout.reopen(RUBY_PLATFORM =~ /mswin/ ? "NUL" : "/dev/null")
       end
       yield
       if env == 'test'
-        $stdout = stdout
+        $stdout.reopen(stdout)
       end
     end
   end

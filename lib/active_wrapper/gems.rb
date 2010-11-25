@@ -6,16 +6,17 @@ unless defined?(ActiveWrapper::Gems)
     class Gems
     
       VERSIONS = {
-        :actionmailer => '=2.3.5',
-        :activerecord => '=2.3.5',
+        :activerecord => '=3.0.3',
+        :mysql2 => '=0.2.6',
+        :pony => '=1.1',
         :rake => '=0.8.7',
-        :rspec => '=1.3.0'
+        :rspec => '=1.3.1'
       }
     
       TYPES = {
-        :gemspec => [ :activerecord, :actionmailer, :mysql ],
+        :gemspec => [ :activerecord, :mysql2 ],
         :gemspec_dev => [ :rspec ],
-        :lib => [ :activerecord, :actionmailer, :mysql ],
+        :lib => [ :activerecord, :mysql2 ],
         :rake => [ :rake, :rspec ],
         :spec => [ :rspec ]
       }
