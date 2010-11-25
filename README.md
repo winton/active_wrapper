@@ -6,13 +6,13 @@ Wraps ActiveRecord and Logger for use in non-Rails environments.
 Compatibility
 -------------
 
-Tested with Ruby 1.8.6, 1.8.7, and 1.9.1.
+Maintained under Ruby 1.9.2.
 
 Setup
 -----
 
 <pre>
-sudo gem install active_wrapper --source http://gemcutter.org
+gem install active_wrapper
 </pre>
 
 Usage
