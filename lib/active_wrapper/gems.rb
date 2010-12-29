@@ -8,7 +8,6 @@ unless defined?(ActiveWrapper::Gems)
       VERSIONS = {
         :activerecord => '=3.0.3',
         :mysql2 => '=0.2.6',
-        :pony => '=1.1',
         :rake => '=0.8.7',
         :rspec => '=1.3.1'
       }

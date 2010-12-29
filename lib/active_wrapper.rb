@@ -5,13 +5,11 @@ ActiveWrapper::Gems.require(:lib)
 require 'active_record'
 require 'fileutils'
 require 'logger'
-require 'pony'
 require 'yaml'
 
 $:.unshift File.dirname(__FILE__) + '/active_wrapper'
 
 require 'db'
-require 'email'
 require 'log'
 require 'version'
 
@@ -28,10 +26,9 @@ module ActiveWrapper
       }.merge(options.reject { |k, v| v.nil? })
       
       db = Db.new(options)
-      mail = Email.new(options)
       log = Log.new(options)
       
-      [ db, log, mail ]
+      [ db, log ]
     end
   end
 end

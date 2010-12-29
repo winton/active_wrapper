@@ -1,9 +1,0 @@
-test:
-  smtp:
-    address: smtp.gmail.com
-    authentication: :plain
-    domain: mydomain.com
-    password: password
-    port: 587
-    enable_starttls_auto: true
-    user_name: test@mydomain.com
