@@ -1,6 +1,11 @@
 require File.dirname(__FILE__) + '/active_wrapper/gems'
 
-ActiveWrapper::Gems.activate %w(activerecord mysql2)
+case ActiveWrapper::Gems.gemset
+when :default
+  ActiveWrapper::Gems.activate %w(activerecord mysql2)
+when :activerecord_2
+  ActiveWrapper::Gems.activate %w(activerecord mysql)
+end
 
 require 'active_record'
 require 'fileutils'
