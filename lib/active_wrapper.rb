@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/active_wrapper/gems'
 
-ActiveWrapper::Gems.require(:lib)
+ActiveWrapper::Gems.activate %w(activerecord mysql2)
 
 require 'active_record'
 require 'fileutils'
@@ -11,7 +11,6 @@ $:.unshift File.dirname(__FILE__) + '/active_wrapper'
 
 require 'db'
 require 'log'
-require 'version'
 
 module ActiveWrapper
   class <<self

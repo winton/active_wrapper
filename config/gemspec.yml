@@ -1,0 +1,13 @@
+name: active_wrapper
+version: 0.3.4
+authors:
+  - Winton Welsh
+email: mail@wintoni.us
+homepage: http://github.com/winton/active_wrapper
+summary: Wraps ActiveRecord and Logger for use in non-Rails environments
+description: Wraps ActiveRecord and Logger for use in non-Rails environments
+dependencies:
+  - activerecord
+  - mysql2
+development_dependencies:
+  - rspec

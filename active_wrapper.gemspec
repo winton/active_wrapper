@@ -1,29 +1,27 @@
 # -*- encoding: utf-8 -*-
 lib = File.expand_path('../lib/', __FILE__)
 $:.unshift lib unless $:.include?(lib)
-
+ 
 require 'active_wrapper/gems'
-require 'active_wrapper/version'
+ActiveWrapper::Gems.gemset ||= :default
 
 Gem::Specification.new do |s|
-  s.name = "active_wrapper"
-  s.version = ActiveWrapper::VERSION
-  s.platform = Gem::Platform::RUBY
-  s.authors = ["Winton Welsh"]
-  s.email = ["mail@wintoni.us"]
-  s.homepage = "http://github.com/winton/active_wrapper"
-  s.summary = "Wraps ActiveRecord and Logger for use in non-Rails environments"
-  s.description = "Wraps ActiveRecord and Logger for use in non-Rails environments"
+  ActiveWrapper::Gems.gemspec.hash.each do |key, value|
+    unless %w(dependencies development_dependencies).include?(key)
+      s.send "#{key}=", value
+    end
+  end
 
-  ActiveWrapper::Gems::TYPES[:gemspec].each do |g|
-    s.add_dependency g.to_s, ActiveWrapper::Gems::VERSIONS[g]
+  ActiveWrapper::Gems.gemspec.dependencies.each do |g|
+    s.add_dependency g.to_s, ActiveWrapper::Gems.versions[g]
   end
   
-  ActiveWrapper::Gems::TYPES[:gemspec_dev].each do |g|
-    s.add_development_dependency g.to_s, ActiveWrapper::Gems::VERSIONS[g]
+  ActiveWrapper::Gems.gemspec.development_dependencies.each do |g|
+    s.add_development_dependency g.to_s, ActiveWrapper::Gems.versions[g]
   end
 
-  s.files = Dir.glob("{bin,lib,resources}/**/*") + %w(LICENSE README.md)
-  s.executables = Dir.glob("{bin}/*").collect { |f| File.basename(f) }
-  s.require_path = 'lib'
+  s.executables = `git ls-files -- {bin}/*`.split("\n").collect { |f| File.basename(f) }
+  s.files = `git ls-files`.split("\n")
+  s.require_paths = %w(lib)
+  s.test_files = `git ls-files -- {features,test,spec}/*`.split("\n")
 end

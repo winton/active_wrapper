@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/lib/active_wrapper/gems'
 
-ActiveWrapper::Gems.require(:rake)
+ActiveWrapper::Gems.activate %w(rake rspec)
 
 require 'rake'
 require 'rake/gempackagetask'
@@ -30,30 +30,24 @@ if defined?(Spec::Rake::SpecTask)
 end
 
 namespace :gems do
-  desc "Install gems (DEV=1|0 DOCS=1|0 SUDO=1|0)"
+  desc "Install gems (DEV=0 DOCS=0 GEMSPEC=default SUDO=0)"
   task :install do
-    file = File.dirname(__FILE__) + '/gems'
-    sudo = (ENV['SUDO'] ||= '0').to_i
-    docs = (ENV['DOCS'] ||= '0').to_i
-    sudo = sudo == 1 ? 'sudo' : ''
-    docs = docs == 1 ? '' : '--no-ri --no-rdoc'
-    gems = []
+    dev = ENV['DEV'] == '1'
+    docs = ENV['DOCS'] == '1' ? '' : '--no-ri --no-rdoc'
+    gemset = ENV['GEMSET']
+    sudo = ENV['SUDO'] == '1' ? 'sudo' : ''
     
-    if File.exists?(file)
-      File.open(file, 'r') do |f|
-        gems = f.readlines.collect do |line|
-          line.split(' ')
-        end
-      end
+    ActiveWrapper::Gems.gemset = gemset if gemset
+    
+    if dev
+      gems = ActiveWrapper::Gems.gemspec.development_dependencies
     else
-      gems = GemTemplate::Gems::TYPES[:gemspec]
-      gems = GemTemplate::Gems::TYPES[:gemspec_dev] if ENV['DEV'] == '1'
-      gems.collect! do |g|
-        [ g.to_s, GemTemplate::Gems::VERSIONS[g] ]
-      end
+      gems = ActiveWrapper::Gems.gemspec.dependencies
     end
     
-    gems.each do |(name, version)|      
+    gems.each do |name|
+      name = name.to_s
+      version = ActiveWrapper::Gems.versions[name]
       if Gem.source_index.find_name(name, version).empty?
         version = version ? "-v #{version}" : ''
         system "#{sudo} gem install #{name} #{version} #{docs}"
@@ -64,15 +58,15 @@ namespace :gems do
   end
 end
 
-desc "Install gem locally"
-task :install => :package do
-  sh %{gem install pkg/#{gemspec.name}-#{gemspec.version}}
-end
-
 desc "Validate the gemspec"
 task :gemspec do
   gemspec.validate
 end
 
-task :package => :gemspec
+desc "Install gem locally"
+task :install => :package do
+  sh %{gem install pkg/#{gemspec.name}-#{gemspec.version}}
+end
+
 task :default => :spec
+task :package => :gemspec
