@@ -3,9 +3,9 @@ require File.expand_path("#{File.dirname(__FILE__)}/../spec_helper")
 describe ActiveWrapper::Log do
   
   before(:each) do
-    FileUtils.rm_f(@path = $root + "/spec/example_project/log/test.log")
+    FileUtils.rm_f(@path = $root + "/spec/fixtures/example_project/log/test.log")
     $db, $log, $mail = ActiveWrapper.setup(
-      :base => $root + '/spec/example_project',
+      :base => $root + '/spec/fixtures/example_project',
       :env => 'test'
     )
   end
