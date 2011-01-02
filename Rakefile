@@ -3,7 +3,6 @@ require File.dirname(__FILE__) + '/lib/active_wrapper/gems'
 ActiveWrapper::Gems.activate %w(rake rspec)
 
 require 'rake'
-require 'rake/gempackagetask'
 require 'spec/rake/spectask'
 
 def gemspec
@@ -13,13 +12,6 @@ def gemspec
   end
 end
 
-if defined?(Rake::GemPackageTask)
-  Rake::GemPackageTask.new(gemspec) do |pkg|
-    pkg.gem_spec = gemspec
-  end
-  task :gem => :gemspec
-end
-
 if defined?(Spec::Rake::SpecTask)
   desc "Run specs"
   Spec::Rake::SpecTask.new do |t|
@@ -27,10 +19,41 @@ if defined?(Spec::Rake::SpecTask)
     t.spec_opts = %w(-fs --color)
   end
   task :spec
+  task :default => :spec
+end
+
+desc "Build gem(s)"
+task :gem do
+  old_gemset = ENV['GEMSET']
+  pkg = "#{File.dirname(__FILE__)}/pkg"
+  system "rm -Rf #{pkg}"
+  ActiveWrapper::Gems.gemset_names.each do |gemset|
+    ENV['GEMSET'] = gemset.to_s
+    system "mkdir -p #{pkg} && cd #{pkg} && gem build ../gem_template.gemspec"
+  end
+  ENV['GEMSET'] = old_gemset
+end
+
+namespace :gem do
+  desc "Install gem(s)"
+  task :install do
+    Rake::Task['gem'].invoke
+    Dir["#{File.dirname(__FILE__)}/pkg/*.gem"].each do |pkg|
+      system "gem install #{pkg} --no-ri --no-rdoc"
+    end
+  end
+  
+  desc "Push gem(s)"
+  task :push do
+    Rake::Task['gem'].invoke
+    Dir["#{File.dirname(__FILE__)}/pkg/*.gem"].each do |pkg|
+      system "gem push #{pkg}"
+    end
+  end
 end
 
 namespace :gems do
-  desc "Install gems (DEV=0 DOCS=0 GEMSPEC=default SUDO=0)"
+  desc "Install gem dependencies (DEV=0 DOCS=0 GEMSPEC=default SUDO=0)"
   task :install do
     dev = ENV['DEV'] == '1'
     docs = ENV['DOCS'] == '1' ? '' : '--no-ri --no-rdoc'
@@ -62,11 +85,3 @@ desc "Validate the gemspec"
 task :gemspec do
   gemspec.validate
 end
-
-desc "Install gem locally"
-task :install => :package do
-  sh %{gem install pkg/#{gemspec.name}-#{gemspec.version}}
-end
-
-task :default => :spec
-task :package => :gemspec

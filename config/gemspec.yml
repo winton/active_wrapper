@@ -10,4 +10,5 @@ dependencies:
   - activerecord
   - mysql2
 development_dependencies:
+  - rake
   - rspec
