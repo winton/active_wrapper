@@ -8,7 +8,10 @@ summary: Wraps ActiveRecord and Logger for use in non-Rails environments
 description: Wraps ActiveRecord and Logger for use in non-Rails environments
 dependencies:
   - activerecord
-  - mysql2
+  - default:
+    - mysql2
+  - activerecord_2:
+    - mysql
 development_dependencies:
   - rake
   - rspec
