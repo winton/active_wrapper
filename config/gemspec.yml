@@ -10,7 +10,7 @@ dependencies:
   - activerecord
   - default:
     - mysql2
-  - activerecord_2:
+  - ar2:
     - mysql
 development_dependencies:
   - rake

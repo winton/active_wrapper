@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/active_wrapper/gems'
 case ActiveWrapper::Gems.gemset
 when :default
   ActiveWrapper::Gems.activate %w(activerecord mysql2)
-when :activerecord_2
+when :ar2
   ActiveWrapper::Gems.activate %w(activerecord mysql)
 end
 

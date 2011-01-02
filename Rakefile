@@ -29,7 +29,7 @@ task :gem do
   system "rm -Rf #{pkg}"
   ActiveWrapper::Gems.gemset_names.each do |gemset|
     ENV['GEMSET'] = gemset.to_s
-    system "mkdir -p #{pkg} && cd #{pkg} && gem build ../gem_template.gemspec"
+    system "mkdir -p #{pkg} && cd #{pkg} && gem build ../active_wrapper.gemspec"
   end
   ENV['GEMSET'] = old_gemset
 end

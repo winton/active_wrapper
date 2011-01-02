@@ -2,7 +2,7 @@
 lib = File.expand_path('../lib/', __FILE__)
 $:.unshift lib unless $:.include?(lib)
  
-require 'gem_template/gems'
+require 'active_wrapper/gems'
 ActiveWrapper::Gems.gemset ||= ENV['GEMSET'] || :default
 
 Gem::Specification.new do |s|

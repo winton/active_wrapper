@@ -3,7 +3,7 @@ active_wrapper:
   rspec: ~>1.0
   default:
     activerecord: ~>3.0
-    mysql2:
-  activerecord_2:
+    mysql2: null
+  ar2:
     activerecord: ~>2.0
-    mysql:
+    mysql: null
