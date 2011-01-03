@@ -1,5 +1,5 @@
 name: active_wrapper
-version: 0.4.0
+version: 0.4.1
 authors:
   - Winton Welsh
 email: mail@wintoni.us
@@ -8,10 +8,6 @@ summary: Wraps ActiveRecord and Logger for use in non-Rails environments
 description: Wraps ActiveRecord and Logger for use in non-Rails environments
 dependencies:
   - activerecord
-  - default:
-    - mysql2
-  - ar2:
-    - mysql
 development_dependencies:
   - rake
   - rspec
