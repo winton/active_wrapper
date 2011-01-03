@@ -4,6 +4,7 @@ module ActiveWrapper
     attr_reader :base, :config, :env
     
     def initialize(options)
+      @adapter = options[:adapter]
       @base = options[:base]
       if File.exists?(path = "#{base}/config/database.yml")
         @config = YAML::load(File.open(path))
@@ -35,6 +36,7 @@ module ActiveWrapper
       if !connected? || options
         config_clone = Marshal.load(Marshal.dump(config))
         config_clone[env].merge!(options || {})
+        config_clone[env]['adapter'] = @adapter if @adapter
         ActiveRecord::Base.configurations = config_clone
         ActiveRecord::Base.establish_connection(env)
       end
