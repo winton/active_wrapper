@@ -6,3 +6,4 @@ active_wrapper:
     activesupport: ~>3.0
   ar2:
     activerecord: ~>2.0
+  solo: null
