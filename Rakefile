@@ -3,7 +3,11 @@ require File.dirname(__FILE__) + '/lib/active_wrapper/gems'
 ActiveWrapper::Gems.activate %w(rake rspec)
 
 require 'rake'
-require 'spec/rake/spectask'
+
+begin
+  require 'spec/rake/spectask'
+rescue Exception => e
+end
 
 def gemspec
   @gemspec ||= begin
