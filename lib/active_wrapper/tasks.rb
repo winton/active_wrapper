@@ -2,6 +2,8 @@ require File.expand_path("#{File.dirname(__FILE__)}/../active_wrapper")
 
 module ActiveWrapper
   class Tasks
+
+    include Rake::DSL
     
     def initialize(options={}, &block)
       

@@ -1,9 +1,9 @@
 active_wrapper:
-  rake: >=0.8.7
-  rspec: ~>1.0
+  rake: '>=0.8.7'
+  rspec: '~>1.0'
   default:
-    activerecord: ~>3.0
-    activesupport: ~>3.0
+    activerecord: '~>3.0'
+    activesupport: '~>3.0'
   ar2:
-    activerecord: ~>2.0
+    activerecord: '~>2.0'
   solo: null
