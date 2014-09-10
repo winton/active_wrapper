@@ -1,3 +1,5 @@
+require 'erb'
+
 module ActiveWrapper
   class Db
     
@@ -7,7 +9,7 @@ module ActiveWrapper
       @adapter = options[:adapter]
       @base = options[:base]
       if File.exists?(path = "#{base}/config/database.yml")
-        @config = YAML::load(File.open(path))
+        @config = YAML.load(ERB.new(File.new(path).read).result)
       else
         raise "Could not find #{path}"
       end
